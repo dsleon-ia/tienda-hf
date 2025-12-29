@@ -63,4 +63,11 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
      */
     @Query("SELECT p FROM Product p WHERE p.deleted = false ORDER BY p.price DESC")
     List<Product> findTopNByPrice(Pageable limit);
+
+    /**
+     * Elimina físicamente todos los productos asociados a una categoría.
+     * Útil para limpieza de productos eliminados lógicamente antes de eliminar una categoría.
+     * @param categoryId ID de la categoría.
+     */
+    void deleteByCategory_Id(UUID categoryId);
 }

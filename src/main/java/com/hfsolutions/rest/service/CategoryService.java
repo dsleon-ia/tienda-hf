@@ -10,6 +10,7 @@ import com.hfsolutions.rest.mapper.CategoryMapper;
 import com.hfsolutions.rest.repository.jpa.CategoryRepository;
 import com.hfsolutions.rest.repository.jpa.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -49,9 +50,14 @@ public class CategoryService {
         return CategoryMapper.toCategoryResponse(category);
     }
 
+    @Transactional
     public void delete(UUID id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("Categoría no encontrada"));
         if (productRepository.existsByCategory_IdAndDeletedFalse(id)) throw new BadRequestException("La categoría tiene productos asociados");
+        
+        // Limpiar productos eliminados lógicamente (soft-deleted) para evitar violación de FK
+        productRepository.deleteByCategory_Id(id);
+        
         categoryRepository.delete(category);
     }
 }

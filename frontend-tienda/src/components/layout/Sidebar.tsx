@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { Package, Tags, ClipboardList, LayoutDashboard, Settings, Moon, Sun, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/hooks/use-theme';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 
 const navigation = [
@@ -18,6 +19,13 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { theme, toggleTheme } = useTheme();
+  const isMobile = useIsMobile();
+
+  const handleNavigation = () => {
+    if (isMobile && onClose) {
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -63,7 +71,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <NavLink
                 key={item.name}
                 to={item.href}
-                onClick={onClose}
+                onClick={handleNavigation}
                 className={({ isActive }) =>
                   cn(
                     'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200',
@@ -107,7 +115,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             </Button>
             <NavLink
               to="/settings"
-              onClick={onClose}
+              onClick={handleNavigation}
               className={({ isActive }) =>
                 cn(
                   'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',

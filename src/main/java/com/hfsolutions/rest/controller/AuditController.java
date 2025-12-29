@@ -33,9 +33,7 @@ public class AuditController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Historial recuperado exitosamente",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ProductAudit.class)))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al consultar auditoría\", \"path\": \"/api/audit/products/123e4567-e89b-12d3-a456-426614174000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public List<ProductAudit> byProduct(@Parameter(description = "ID del producto") @PathVariable UUID productId) {
         return repository.findByProductIdOrderByTimestampDesc(productId);
@@ -46,9 +44,7 @@ public class AuditController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de movimientos recuperada exitosamente",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ProductAudit.class)))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al consultar últimos movimientos\", \"path\": \"/api/audit/products\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public List<ProductAudit> latest() {
         return repository.findTop100ByOrderByTimestampDesc();
@@ -59,9 +55,7 @@ public class AuditController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista filtrada recuperada exitosamente",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ProductAudit.class)))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al filtrar por acción\", \"path\": \"/api/audit/actions/CREATE\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public List<ProductAudit> byAction(@Parameter(description = "Tipo de acción a consultar") @PathVariable AuditAction action) {
         return repository.findByActionOrderByTimestampDesc(action);

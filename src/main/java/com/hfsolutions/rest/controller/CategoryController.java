@@ -78,9 +78,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "404", description = "Categoría no encontrada",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
                             examples = @ExampleObject(value = "{\"status\": 404, \"error\": \"Not Found\", \"message\": \"Categoría no encontrada\", \"path\": \"/api/categories/987fcdeb-51a2-43d1-a5c6-987654321000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}"))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error inesperado\", \"path\": \"/api/categories/987fcdeb-51a2-43d1-a5c6-987654321000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public CategoryResponse update(@Parameter(description = "ID de la categoría") @PathVariable UUID id,
                                    @Valid @RequestBody CategoryUpdateRequest req) {
@@ -97,9 +95,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "No se puede eliminar porque tiene productos asociados",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
                             examples = @ExampleObject(value = "{\"status\": 400, \"error\": \"Bad Request\", \"message\": \"La categoría tiene productos asociados\", \"path\": \"/api/categories/987fcdeb-51a2-43d1-a5c6-987654321000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}"))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error inesperado\", \"path\": \"/api/categories/987fcdeb-51a2-43d1-a5c6-987654321000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public ResponseEntity<Object> delete(@Parameter(description = "ID de la categoría") @PathVariable UUID id) {
         categoryService.delete(id);

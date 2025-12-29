@@ -223,7 +223,7 @@ export default function Products() {
             <Eye className="h-4 w-4 text-muted-foreground hover:text-foreground" />
           </Button>
 
-          <DropdownMenu>
+          <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
                 <MoreHorizontal className="h-4 w-4" />

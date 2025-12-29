@@ -85,9 +85,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Producto o categoría no encontrada",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
                             examples = @ExampleObject(value = "{\"status\": 404, \"error\": \"Not Found\", \"message\": \"Producto no encontrado\", \"path\": \"/api/products/123e4567-e89b-12d3-a456-426614174000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}"))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al actualizar\", \"path\": \"/api/products/123e4567-e89b-12d3-a456-426614174000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public ProductResponse update(@Parameter(description = "ID del producto a actualizar") @PathVariable UUID id,
                                   @Valid @RequestBody UpdateProductRequest req) {
@@ -101,9 +99,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Producto no encontrado",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
                             examples = @ExampleObject(value = "{\"status\": 404, \"error\": \"Not Found\", \"message\": \"Producto no encontrado\", \"path\": \"/api/products/123e4567-e89b-12d3-a456-426614174000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}"))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al eliminar\", \"path\": \"/api/products/123e4567-e89b-12d3-a456-426614174000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public ResponseEntity<Void> delete(@Parameter(description = "ID del producto a eliminar") @PathVariable UUID id) {
         productService.delete(id);
@@ -121,9 +117,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Producto no encontrado",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
                             examples = @ExampleObject(value = "{\"status\": 404, \"error\": \"Not Found\", \"message\": \"Producto no encontrado\", \"path\": \"/api/products/123e4567-e89b-12d3-a456-426614174000/stock\", \"timestamp\": \"2023-10-01T12:00:00Z\"}"))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al actualizar stock\", \"path\": \"/api/products/123e4567-e89b-12d3-a456-426614174000/stock\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public ProductResponse updateStock(@Parameter(description = "ID del producto") @PathVariable UUID id,
                                        @Valid @RequestBody UpdateStockRequest req) {
@@ -134,9 +128,7 @@ public class ProductController {
     @Operation(summary = "Filtrar por categoría", description = "Obtiene una lista paginada de productos pertenecientes a una categoría específica.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista filtrada recuperada exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al filtrar por categoría\", \"path\": \"/api/products/category/987fcdeb-51a2-43d1-a5c6-987654321000\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public Page<ProductResponse> byCategory(@Parameter(description = "ID de la categoría") @PathVariable UUID categoryId,
                                        @Parameter(description = "Número de página") @RequestParam(defaultValue = "0") int page,
@@ -149,9 +141,7 @@ public class ProductController {
     @Operation(summary = "Buscar por título", description = "Busca productos cuyo título contenga el texto proporcionado (búsqueda insensible a mayúsculas).")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Resultados de búsqueda recuperados exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error en búsqueda\", \"path\": \"/api/products/search\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public Page<ProductResponse> search(@Parameter(description = "Texto a buscar") @RequestParam("q") String q,
                                    @Parameter(description = "Número de página") @RequestParam(defaultValue = "0") int page,
@@ -164,9 +154,7 @@ public class ProductController {
     @Operation(summary = "Filtrar por rango de precio", description = "Obtiene productos cuyo precio se encuentra dentro del rango especificado (inclusivo).")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista filtrada recuperada exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class),
-                            examples = @ExampleObject(value = "{\"status\": 500, \"error\": \"Internal Server Error\", \"message\": \"Error al filtrar por precio\", \"path\": \"/api/products/price-range\", \"timestamp\": \"2023-10-01T12:00:00Z\"}")))
+
     })
     public ResponseEntity<Page<ProductResponse>> priceRange(@Parameter(description = "Precio mínimo") @RequestParam("min") BigDecimal min,
                                        @Parameter(description = "Precio máximo") @RequestParam("max") BigDecimal max,
